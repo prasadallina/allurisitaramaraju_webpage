@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ data.district.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+       /* ============================= */
+/* SERVICES SECTION - Responsive */
+/* ============================= */
+.service-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(15px, 2vw, 25px);
+  padding: clamp(20px, 4vw, 50px);
+  list-style-type: none;
+  background: linear-gradient(135deg, #f7fafc 0%, #edf5f1 100%);
+  border-radius: 16px;
+  margin: clamp(20px, 4vw, 50px) auto;
+  max-width: 1100px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+/* Service Box */
+.service-links li {
+  background: #ffffff;
+  border: 1px solid rgba(27, 94, 32, 0.1);
+  border-radius: 14px;
+  width: clamp(120px, 25vw, 180px);
+  height: clamp(120px, 25vw, 180px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.35s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.service-links li:hover {
+  transform: translateY(-6px);
+  background: #1b5e20;
+  box-shadow: 0 8px 18px rgba(27, 94, 32, 0.25);
+}
+
+/* Anchor Styling */
+.service-links a {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icon & Label */
+.service-links a .icon {
+  font-size: clamp(28px, 6vw, 40px);
+  margin-bottom: 10px;
+  color: #1b5e20;
+  transition: color 0.3s ease;
+}
+
+.service-links a span {
+  font-size: clamp(13px, 2.5vw, 15px);
+  font-weight: 600;
+  color: #1b5e20;
+  transition: color 0.3s ease;
+}
+
+.service-links li:hover a .icon,
+.service-links li:hover a span {
+  color: #ffffff;
+}
+
+/* ========================= */
+/* MOBILE OPTIMIZATION */
+/* ========================= */
+@media (max-width: 768px) {
+  .service-links {
+    gap: clamp(12px, 3vw, 20px);
+    padding: clamp(15px, 5vw, 25px);
+  }
+
+  .service-links li {
+    width: clamp(100px, 40vw, 150px);
+    height: clamp(100px, 40vw, 150px);
+  }
+}
+
+@media (max-width: 480px) {
+  .service-links {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .service-links li {
+    width: 45%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .service-links a span {
+    font-size: clamp(12px, 3.5vw, 14px);
+  }
+}
+
+           /* Footer */
+footer {
+  background: linear-gradient(135deg, #003973, #e5e5be);
+  color: #fff;
+  text-align: center;
+  padding: 25px;
+  font-size: 16px;
+}
+
+footer p {
+  margin: 8px 0;
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+  <header class="site-header">
+    <div class="logo-section">
+      <img src="{{ url_for('static', filename='img/AP-Police.png') }}" alt="AP Police Logo">
+    </div>
+    <div class="title-section">
+      <h1>{{ data.district.name | upper }}</h1>
+    </div>
+    <div class="logo-section">
+      <img src="{{ url_for('static', filename='img/Alluri_Sita_Rama_Raju-removebg-preview.png') }}" alt="District Emblem">
+    </div>
+  </header>
+
+
+  <!-- Navbar Section -->
+    <nav class="navbar">
+        <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+        <ul id="nav-links">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
+            <li><a href="{{ url_for('organization') }}">Organization</a></li>
+            <li><a href="{{ url_for('officers') }}">Officers</a></li>
+            <li><a href="{{ url_for('policestation') }}">Police Stations</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('wings') }}">Wings</a></li>
+            <li><a href="{{ url_for('services') }}">Services</a></li>
+        </ul>
+    </nav>
+    <!-- Main Services Section -->
+    <ul class="service-links">
+
+        {% for service in data.services %}
+        <li>
+            <a href="{{ service.url }}" target="_blank">
+                <div class="icon">{{ service.icon }}</div>
+                <span>{{ service.name }}</span>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <script>
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      document.querySelector('.navbar').classList.toggle('active');
+    });
+  </script>
+
+    <!-- Footer -->
+  <footer class="site-footer" style="text-align:center; padding:20px;">
+    <p>📍 {{ data.contact.address }}</p>
+    <p>☎️ Emergency: {{ data.contact.phone }} | ✉️ Email: {{ data.contact.email }}</p>
+    <p>&copy; 2025 {{ data.district.name }}</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,76 @@
+{
+  "district": {
+    "emblem": "static/img/Alluri_Sita_Rama_Raju-removebg-preview.png",
+    "logo": "static/img/AP-Police.png",
+    "name": "ALLURI SEETHARAMARAJU DISTRICT POLICE"
+  },
+  "hero_banner": {
+    "image1": "static/img/Frame_9-Picsart-AiImageEnhancer.png",
+    "image2": "static/img/Frame_10-Picsart-AiImageEnhancer.png",
+    "image3": "static/img/WhatsApp_Image_2025-11-13_at_17.24.35_1.jpeg"
+  },
+  "sp_profile": {
+    "designation": "Superintendent of Police",
+     "district": "Alluri Seetharamaraju District",
+    "message": "Our mission is safety, our method is service, our message is justice. We stand as guardians of peace, protectors of the innocent, and defenders of the law. With courage we act, with integrity we serve, and with compassion we care. For every citizen we pledge protection, for every crime we promise action, and for every injustice we deliver justice.",
+    "name": "Shri AMIT BARDAR, IPS",
+    "photo": "static/img/asr sp.jpg"
+  },
+  "announcements": [
+    "A 60-year-old man was beaten to death in Hukumpeta locality, Kurupam Mandal, following a dispute over goats trespassing into a neighboring farm.",
+    "A total of 65 girls from Kurupam Gurukul residential school were admitted to King George Hospital in Visakhapatnam due to a sudden illness; 59 have been discharged, and the remaining six are recovering well.",
+    "Parvathipuram Manyam district police arrested a 36-year-old man for impersonating an IPS officer during Deputy Chief Minister Pawan Kalyan’s visit to the district.",
+    "Special teams are being formed to trace and apprehend individuals involved in ganja smuggling, following a comprehensive review of crime status and case investigations over the past six months.",
+    "The district police commemorated Police Martyrs Memorial Day by paying tributes to fallen officers, highlighting their sacrifices in ensuring public safety.",
+    "Police seized 395 kg of ganja worth Rs 39 lakhs in Parvathipuram Manyam district, with two individuals arrested in connection with the smuggling operation.",
+    "అనకపల్లి జిల్లా చోడవరంలో 275 కిలోల గంజాయిని పట్టుకున్న ఆళ్లూరి సీతారామరాజు జిల్లా పోలీసులు, ముగ్గురు నిందితులను అరెస్టు చేశారు. ఈ నకిలీ నార్కోటిక్ వ్యాపారంపై దర్యాప్తు కొనసాగుతోంది."
+  ],
+  "gallery": [
+    "static/gallery/1.jpg",
+    "static/img/2.jpg",
+    "static/img/3.jpg",
+    "static/gallery/5.jpg",
+    "static/img/6.jpg",
+    "static/img/7.jpg",
+    "static/img/9.jpg",
+    "static/img/10.jpg",
+    "static/img/11.jpg",
+    "static/gallery/13.jpg",
+    "static/gallery/14.jpg",
+    "static/gallery/15.jpg",
+    "static/gallery/16.jpg",
+    "static/gallery/17.jpg",
+    "static/gallery/18.jpg",
+    "static/gallery/19.jpg",
+    "static/gallery/20.jpg",
+    "static/gallery/21.jpg",
+    "static/gallery/22.jpg",
+    "static/gallery/23.jpg",
+    "static/gallery/24.jpg",
+    "static/gallery/25.jpg",
+    "static/gallery/26.jpg",
+    "static/gallery/27.jpg",
+    "static/gallery/28.jpg",
+    "static/gallery/29.jpg",
+    "static/gallery/30.jpg",
+    "static/gallery/31.jpg",
+    "static/gallery/32.jpg",
+    "static/gallery/33.jpg"
+  ],
+  "social_links": {
+    "facebook": "https://www.facebook.com/people/ASRDistrictPolice/100080459076358/",
+    "instagram": "https://www.instagram.com/asr_distpolice/",
+    "twitter": "https://x.com/Asrpolice100",
+    "youtube": "https://www.youtube.com/@allurisitharamarajudistric9397/videos"
+  },
+  "quick_links": [
+    {
+      "title": "Social Media",
+      "url": "socialmedia.html"
+    },
+    {
+      "title": "Useful Government Links",
+      "url": "https://ap.gov.in"
+    }
+  ]
+}

@@ -1,0 +1,239 @@
+{
+  "district": {
+    "emblem": "static/img/Alluri_Sita_Rama_Raju-removebg-preview.png",
+    "logo": "static/img/AP-Police.png",
+    "name": "ALLURI SEETHARAMARAJU DISTRICT POLICE"
+  },
+  "sdpo_divisions": [
+    {
+      "name": "Paderu SDPO Division",
+      "stations": [
+        {
+          "email": "sdpopaderu-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Paderu+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223456",
+          "mobile": "9440796301",
+          "name": "Paderu PS"
+        },
+        {
+          "email": "hukumapeta-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Hukumapeta+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223457",
+          "mobile": "9440796302",
+          "name": "Hukumapeta PS"
+        },
+        {
+          "email": "pedabayalu-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Pedabayalu+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223458",
+          "mobile": "9440796303",
+          "name": "Pedabayalu PS"
+        },
+        {
+          "email": "munchingput-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Munchingput+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223459",
+          "mobile": "9440796304",
+          "name": "Munchingput PS"
+        },
+        {
+          "email": "araku-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Araku+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223460",
+          "mobile": "9440796305",
+          "name": "Araku PS"
+        },
+        {
+          "email": "ananthagiri-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Ananthagiri+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223461",
+          "mobile": "9440796306",
+          "name": "Ananthagiri PS"
+        },
+        {
+          "email": "dumbriguda-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Dumbriguda+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223462",
+          "mobile": "9440796307",
+          "name": "Dumbriguda PS"
+        },
+        {
+          "email": "gmadugula-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=G+Madugula+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223463",
+          "mobile": "9440796308",
+          "name": "G. Madugula PS"
+        }
+      ]
+    },
+    {
+      "name": "Chintapalli SDPO Division",
+      "stations": [
+        {
+          "email": "chintapalli-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Chintapalli+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223464",
+          "mobile": "9440796309",
+          "name": "Chintapalli PS"
+        },
+        {
+          "email": "annavaram-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Annavaram+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223465",
+          "mobile": "9440796310",
+          "name": "Annavaram PS"
+        },
+        {
+          "email": "gkveedhi-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=G+K+Veedhi+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223466",
+          "mobile": "9440796311",
+          "name": "G.K. Veedhi PS"
+        },
+        {
+          "email": "sileru-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Sileru+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223467",
+          "mobile": "9440796312",
+          "name": "Sileru PS"
+        },
+        {
+          "email": "koyyuru-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Koyyuru+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223468",
+          "mobile": "9440796313",
+          "name": "Koyyuru PS"
+        },
+        {
+          "email": "mampa-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Mampa+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223469",
+          "mobile": "9440796314",
+          "name": "Mampa PS"
+        }
+      ]
+    },
+    {
+      "name": "Rampachodavaram SDPO Division",
+      "stations": [
+        {
+          "email": "rampachodavaram-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Rampachodavaram+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223470",
+          "mobile": "9440796315",
+          "name": "Rampachodavaram PS"
+        },
+        {
+          "email": "devipatnam-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Devipatnam+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223471",
+          "mobile": "9440796316",
+          "name": "Devipatnam PS"
+        },
+        {
+          "email": "addateegala-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Addateegala+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223472",
+          "mobile": "9440796317",
+          "name": "Addateegala PS"
+        },
+        {
+          "email": "gangavaram-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Gangavaram+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223473",
+          "mobile": "9440796318",
+          "name": "Gangavaram PS"
+        },
+        {
+          "email": "yramavaram-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Y+Ramavaram+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223474",
+          "mobile": "9440796319",
+          "name": "Y. Ramavaram PS"
+        },
+        {
+          "email": "ducharti-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Ducharti+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223475",
+          "mobile": "9440796320",
+          "name": "Ducharti PS"
+        },
+        {
+          "email": "maredumilli-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Maredumilli+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223476",
+          "mobile": "9440796321",
+          "name": "Maredumilli PS"
+        },
+        {
+          "email": "gurthedu-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Gurthedu+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223477",
+          "mobile": "9440796322",
+          "name": "Gurthedu PS"
+        },
+        {
+          "email": "rajavommangi-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Rajavommangi+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223478",
+          "mobile": "9440796323",
+          "name": "Rajavommangi PS"
+        },
+        {
+          "email": "jaddangi-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Jaddangi+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223479",
+          "mobile": "9440796324",
+          "name": "Jaddangi PS"
+        }
+      ]
+    },
+    {
+      "name": "Chinturu SDPO Division",
+      "stations": [
+        {
+          "email": "chinturu-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Chinturu+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223480",
+          "mobile": "9440796325",
+          "name": "Chinturu PS"
+        },
+        {
+          "email": "donkarai-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Donkarai+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223481",
+          "mobile": "9440796326",
+          "name": "Donkarai PS"
+        },
+        {
+          "email": "mothugudem-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Mothugudem+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223482",
+          "mobile": "9440796327",
+          "name": "Mothugudem PS"
+        },
+        {
+          "email": "yetapaka-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Yetapaka+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223483",
+          "mobile": "9440796328",
+          "name": "Yetapaka PS"
+        },
+        {
+          "email": "kunavaram-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=Kunavaram+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223484",
+          "mobile": "9440796329",
+          "name": "Kunavaram PS"
+        },
+        {
+          "email": "vrpuram-ps@appolice.gov.in",
+          "map_link": "https://www.google.com/maps/search/?api=1&query=V+R+Puram+Police+Station%2C+Alluri+Sitharama+Raju+District%2C+Andhra+Pradesh",
+          "landline": "08936-223485",
+          "mobile": "9440796330",
+          "name": "V.R. Puram PS"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ data.district.name }}</title>
+    <link rel="icon" href="{{ data.district.logo }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ========================================= */
+        /* === SP Profile + Announcements STYLES === */
+        /* ========================================= */
+
+        /* SP ప్రొఫైల్ మరియు Announcements కంటైనర్ */
+        .sp-announcement-container {
+            display: flex;
+            gap: 50px;
+            align-items: stretch;
+            margin: 80px 80px;
+            width: auto;
+        }
+
+        /* SP ప్రొఫైల్ మరియు Announcements బాక్స్ స్టైల్స్ */
+        .sp-profile, .announcements {
+            flex: 1;
+            background: #fff;
+            border-radius: 14px;
+            /* Padding తగ్గించబడింది */
+            padding: 5px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            min-height:300px; 
+        }
+
+        /* SP ప్రొఫైల్ */
+        .sp-profile {
+            background: #f8fafc;
+            text-align: left;
+            padding: 30px; 
+        }
+
+        /* SP ప్రొఫైల్ కంటెంట్ (ఫోటో + కుడి వైపు కంటెంట్) */
+        .sp-profile-content {
+            display: flex; /* ఫోటో మరియు కుడి వైపు కంటెంట్ ఒకే లైన్ లో రావడానికి */
+            gap: 25px; 
+            align-items: flex-start; /* కంటెంట్ పై నుండి ప్రారంభించడానికి */
+        }
+
+        /* SP ఫోటో స్టైల్స్ */
+        .sp-profile img {
+            max-width: 300px; /* ఫోటో సైజు పెంచబడింది */
+            height: 400px; /* ఫోటో ఎత్తు మరింత పెంచబడింది */
+            border-radius: 12px;
+            margin: 45px 0 0 0; 
+            flex-shrink: 0; 
+            object-fit: cover; 
+        }
+
+        /* కుడి వైపున ఉన్న వివరాలు (h3, h4, h5) మరియు మెసేజ్ కంటైనర్ */
+        .sp-details-content {
+            display: flex;
+            flex-direction: column; /* వివరాలు పైన, మెసేజ్ కింద రావడానికి */
+            height: 100%;
+            flex-grow: 1; /* మిగిలిన స్థలాన్ని ఆక్రమించడానికి */
+        }
+
+        /* వివరాలు (h3, h4, h5) */
+        .sp-details-text {
+            flex-shrink: 0; /* పరిమాణం మారకుండా చూస్తుంది */
+            margin-top: 45px;
+        }
+
+        .sp-profile h3 {
+            margin: 0 0 4px;
+            color: #1e3a8a;
+            font-size: 1.8rem;
+        }
+        .sp-profile h4 {
+            margin: 4px 0 8px;
+            color: #2563eb;
+            font-weight: 500;
+            font-size: 1.4rem;
+        }
+        .sp-profile h5 {
+            margin: 4px 0 12px;
+            color: #dd2aa1;
+            font-weight: 500;
+            font-size: 1.3rem;
+        }
+
+        /* మెసేజ్ కంటైనర్ */
+        .sp-details-message {
+            margin-top: 15px; 
+            padding-top: 10px;
+            /* మెసేజ్ పై భాగంలో ఒక గీత (line) వస్తుంది */
+            border-top: 1px dashed #ccc; 
+            /* మెసేజ్ 6-7 లైన్లలో సరిపోయేంత స్థలాన్ని ఆక్రమించడానికి */
+            height: auto;
+            min-height: 150px; /* మెసేజ్ కోసం కనీస ఎత్తును సెట్ చేయవచ్చు, లేకపోతే auto ఉంచవచ్చు */
+        }
+
+        /* SP సందేశం (p) */
+        .sp-details-message p {
+            font-style: normal;
+            color: #475569;
+            line-height: 2.1; /* లైన్ల మధ్య దూరం 1.6 ఉంటే చదవడానికి సులభంగా ఉంటుంది */
+            margin: 0;
+            font-size: 1rem;
+            width: 40ch;
+        }
+
+        /* ========================================= */
+        /* మొబైల్ రెస్పాన్సివ్ కోసం మార్పులు (768px లోపు) */
+        /* ========================================= */
+        @media (max-width: 768px) {
+            .sp-profile {
+                padding: clamp(15px, 3vw, 25px);
+                align-items: center; 
+            }
+            
+            .sp-profile-content {
+                flex-direction: column; 
+                align-items: center; 
+                gap: 15px; 
+            }
+
+            .sp-profile img { 
+                max-width: 160px; 
+                height: auto; 
+            }
+
+            .sp-details-content {
+                width: 100%;
+                align-items: center;
+            }
+
+            .sp-details-text {
+                text-align: center; 
+            }
+            
+            .sp-details-message {
+                border-top: none; 
+                padding-top: 0;
+                margin-top: 10px;
+                min-height: auto; /* మొబైల్‌లో min-height తీసివేయబడింది */
+            }
+             .sp-details-message p {
+                 text-align: center;
+             }
+
+            /* పాత responsive styles ను కూడా సరిచేయబడింది */
+            .sp-profile, .announcements {
+                min-height: 280px;
+                margin: 6px auto;
+                width: 100%;
+            }
+            .announcement-wrapper {
+                min-height: 230px;
+            }
+        }
+        
+        /* మిగతా responsive styles (900px, 540px, 360px) అలాగే ఉంచబడ్డాయి */
+        @media (max-width: 1200px) {
+            .sp-announcement-container { gap: 20px; margin: 20px; }
+            .sp-profile, .announcements { padding: 20px; min-height: 320px; }
+            .sp-profile img { max-width: 200px; height: 220px; }
+        }
+        @media (max-width: 900px) {
+            .sp-announcement-container { flex-direction: column; gap: 20px; margin: 18px; }
+            .sp-profile, .announcements { min-height: 300px; padding: 18px; }
+            .sp-profile img { max-width: 180px; height: 200px; }
+        }
+        @media (max-width: 540px) {
+            .sp-announcement-container { margin: 15px; gap: 15px; }
+            .sp-profile, .announcements { padding: 15px; min-height: 250px; }
+            .sp-profile img { max-width: 150px; }
+            .announcement-list li { font-size: 0.9rem; }
+        }
+@media (max-width: 360px) {
+            /* SP Profile మరియు Announcements బాక్స్ లోపలి స్థలాన్ని (padding) తగ్గిస్తున్నాను */
+            .sp-profile, .announcements { 
+                padding: 10px; /* 12px నుండి 10px కి తగ్గించబడింది */
+                min-height: 220px; /* 230px నుండి 220px కి తగ్గించబడింది */
+            }
+
+            /* SP Profile ఫోటో సైజు */
+            .sp-profile img { 
+                max-width: 150px; /* 130px నుండి 110px కి తగ్గించబడింది */
+                height: 150px; /* చిన్న స్క్రీన్ల కోసం ఎత్తు సెట్ చేయబడింది */
+            }
+
+            /* SP Name (h3) */
+            .sp-details-text h3 { 
+                font-size: 0.8rem; /* 0.9rem నుండి 0.8rem కి తగ్గించబడింది */
+                line-height: 1.2;
+                margin-bottom: 2px;
+            }
+
+            /* SP Designation (h4) */
+            .sp-details-text h4 {
+                font-size: 0.75rem;
+                margin: 2px 0 4px;
+            }
+            
+            /* SP District (h5) */
+            .sp-details-text h5 { 
+                font-size: 0.65rem; /* 0.75rem నుండి 0.65rem కి తగ్గించబడింది */
+                line-height: 1.2;
+                margin-top: 2px;
+            }
+
+            /* Announcements Heading (h3) */
+            .announcements h3 { 
+                font-size: 1rem; /* 1.1rem నుండి 1.0rem కి తగ్గించబడింది */
+            }
+
+            /* Announcement List Items */
+            .announcement-list li { 
+                font-size: 0.75rem; /* 0.8rem నుండి 0.75rem కి తగ్గించబడింది */
+                padding: 8px; /* Padding తగ్గించబడింది */
+            }
+            
+            /* SP Message */
+            .sp-details-message p {
+                font-size: 0.75rem; /* మెసేజ్ ఫాంట్ సైజు తగ్గించబడింది */
+                line-height: 1.4;
+            }
+            
+            /* మెసేజ్ బార్డర్ మరియు మార్జిన్ చిన్న స్క్రీన్లలో సరిపోయేలా */
+            .sp-details-message {
+                margin-top: 8px;
+                padding-top: 6px;
+                min-height: auto;
+            }
+        }
+        /* Announcement Section */
+        .announcements h3 { margin-bottom: 1px; color: #dc2626; text-align: center; flex-shrink: 0; }
+        .announcement-box { flex: 1; background: #f1f5f9; border-radius: 10px; padding: 15px; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; position: relative; }
+        .announcement-wrapper { overflow: hidden; flex: 1; position: relative; }
+        .announcement-list { list-style: none; margin: 0; padding: 0; animation: scroll-up 30s linear infinite; }
+        .announcement-list li { padding: 10px 10px 10px; border-bottom: 1px dashed #cbd5e1; font-size: 0.95rem; color: #1e293b; }
+        @keyframes scroll-up { 0% { transform: translateY(100%); } 100% { transform: translateY(-100%); } }
+
+        /* Gallery Slider */
+        .gallery-slider { display: flex; justify-content: center; align-items: center; margin: 32px 0 24px 0; }
+        .slider-container { width: 95vw; max-width: 900px; height: 440px; background: #eaf6ff; border-radius: 16px; box-shadow: 0 4px 24px #b3c6e033; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; }
+        .slider-container img { width: 100%; height: 100%; object-fit: contain; border-radius: 30px; transition: opacity 0.6s; box-shadow: 0 2px 12px #b3c6e022; background: #eaf6ff; display: block; }
+
+        /* Hero Banner Carousel (Kept as is for other functionality) */
+        .hero-banner-carousel { position: relative; width: 100%; height: 58vh; overflow: hidden; background: #222; display: flex; align-items: center; justify-content: center; }
+        .carousel-images { position: relative; width: 100%; height: 100%; display: flex; }
+        .carousel-slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease-in-out; display: flex; align-items: center; justify-content: center; background-size: cover; background-position: center; background-repeat: no-repeat; }
+        .carousel-slide.active { opacity: 1; z-index: 10; }
+        .carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: none; }
+        .carousel-dots { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 50; display: flex; gap: 10px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, 0.6); cursor: pointer; transition: background 0.3s, transform 0.3s; border: 2px solid #fff; }
+        .dot.active { background: #fff; transform: scale(1.2); }
+        .dot:hover { background: rgba(255, 255, 255, 0.9); }
+        .carousel-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0, 0, 0, 0.5); color: #fff; border: none; font-size: 1.8rem; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; z-index: 30; display: flex; align-items: center; justify-content: center; transition: background 0.3s, transform 0.2s; }
+        .carousel-nav:hover { background: rgba(0, 0, 0, 0.8); transform: translateY(-50%) scale(1.1); }
+        .carousel-nav.prev { left: 15px; }
+        .carousel-nav.next { right: 15px; }
+        @media (max-width: 768px) {
+            .hero-banner-carousel { height: 220px; }
+            .carousel-nav { width: 40px; height: 40px; font-size: 1.4rem; }
+            .carousel-nav.prev { left: 10px; }
+            .carousel-nav.next { right: 10px; }
+            .carousel-dots { bottom: 15px; }
+            .dot { width: 10px; height: 10px; }
+        }
+        @media (max-width: 480px) {
+            .hero-banner-carousel { height: 100px; } 
+            .carousel-nav { width: 35px; height: 35px; font-size: 1.1rem; }
+            .carousel-dots { gap: 6px; }
+            .dot { width: 8px; height: 8px; }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="floating-social-sidebar">
+        <ul>
+            <li><a href="{{ data.social_links.facebook }}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="{{ data.social_links.twitter }}" target="_blank"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="{{ data.social_links.youtube }}" target="_blank"><i class="fab fa-youtube"></i></a></li>
+            <li><a href="{{ data.social_links.instagram }}" target="_blank"><i class="fab fa-instagram"></i></a></li>
+        </ul>
+    </nav>
+
+    <header class="site-header">
+        <div class="logo-section"><img src="{{ data.district.logo }}" alt="AP Police Logo"></div>
+        <div class="title-section"><h1>{{ data.district.name }}</h1></div>
+        <div class="logo-section"><img src="{{ data.district.emblem }}" alt="District Emblem"></div>
+    </header>
+
+    <nav class="navbar">
+        <span class="menu-toggle"><i class="fas fa-bars"></i></span>
+
+        <ul id="nav-links">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
+            <li><a href="{{ url_for('organization') }}">Organization</a></li>
+            <li><a href="{{ url_for('officers') }}">Officers</a></li>
+            <li><a href="{{ url_for('policestation') }}">Police Stations</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('wings') }}">Wings</a></li>
+            <li><a href="{{ url_for('services') }}">Services</a></li>
+            <li><a href="{{ url_for('login') }}">Adminlogin</a></li>
+        </ul>
+    </nav> 	
+
+    
+    <section class="hero-banner-carousel">
+        <div class="carousel-images">
+            <div class="carousel-slide" style="background-image: url('{{ data.hero_banner.image1 }}')">
+                <img src="{{ data.hero_banner.image1 }}" alt="Police" class="carousel-img">
+            </div>
+            <div class="carousel-slide" style="background-image: url('{{ data.hero_banner.image2 }}')">
+                <img src="{{ data.hero_banner.image2 }}" alt="Police" class="carousel-img">
+            </div>
+            <div class="carousel-slide" style="background-image: url('{{ data.hero_banner.image3 }}')">
+                <img src="{{ data.hero_banner.image3 }}" alt="Police" class="carousel-img">
+            </div>
+        </div>
+
+        <div class="carousel-dots">
+            <span class="dot" onclick="goToSlide(0)"></span>
+            <span class="dot" onclick="goToSlide(1)"></span>
+            <span class="dot" onclick="goToSlide(2)"></span>
+        </div>
+
+        <button class="carousel-nav prev" onclick="changeSlide(-1)" title="Previous">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-nav next" onclick="changeSlide(1)" title="Next">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </section>
+
+    <section class="sp-announcement-container">
+        <div class="sp-profile">
+            <div class="sp-profile-content">
+                <img src="{{ data.sp_profile.photo }}" alt="SP Photo">
+                
+                <div class="sp-details-content">
+                    
+                    <div class="sp-details-text">
+                        <h3>{{ data.sp_profile.name }}</h3>
+                        <h4>{{ data.sp_profile.designation }}</h4>
+                        <h5>{{ data.sp_profile.district }}</h5>
+                    </div>
+                    
+                    <div class="sp-details-message">
+                        <p>{{ data.sp_profile.message }}</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="announcements">
+            <h3>📢 Announcements</h3>
+            <div class="announcement-box">
+                <ul class="announcement-list">
+                    {% for a in data.announcements %}
+                    <li>{{ a }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-slider">
+        <div class="slider-container">
+            <img id="gallery-slide" src="{{ data.gallery[0] }}" alt="Gallery Image" />
+        </div>
+    </section>
+
+    <script>
+        const galleryImages = {{ data.gallery|tojson }};
+        let currentSlide = 0;
+        const slideImg = document.getElementById('gallery-slide');
+        function showNextSlide() {
+            currentSlide = (currentSlide + 1) % galleryImages.length;
+            slideImg.style.opacity = 0;
+            setTimeout(() => {
+                slideImg.src = galleryImages[currentSlide];
+                slideImg.style.opacity = 1;
+            }, 400);
+        }
+        setInterval(showNextSlide, 2200);
+    </script>
+    <section class="quick-links">
+        {% for link in data.quick_links %}
+        <div class="link-box">
+            <a href="{{ link.url }}">{{ link.title }}</a>
+        </div>
+        {% endfor %}
+    </section>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelectorAll('#nav-links li a');
+
+        // Toggle menu on hamburger click
+        menuToggle.addEventListener('click', function() {
+            document.querySelector('.navbar').classList.toggle('active');
+        });
+
+        // Close menu automatically when a link is clicked (mobile only)
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 900) { // small screens only
+                    document.querySelector('.navbar').classList.remove('active');
+                }
+            });
+        });
+
+        // CAROUSEL LOGIC
+        let currentSlideIndex = 0;
+        let autoSlideTimer = null;
+
+        function getSlides() { return Array.from(document.querySelectorAll('.carousel-slide')); }
+        function getDots() { return Array.from(document.querySelectorAll('.dot')); }
+
+        function showSlide(index) {
+            const slides = getSlides();
+            const dots = getDots();
+            const total = slides.length;
+            if (!total) return;
+
+            if (index >= total) currentSlideIndex = 0;
+            else if (index < 0) currentSlideIndex = total - 1;
+            else currentSlideIndex = index;
+
+            slides.forEach((s, i) => s.classList.toggle('active', i === currentSlideIndex));
+            dots.forEach((d, i) => d.classList.toggle('active', i === currentSlideIndex));
+        }
+
+        function startAutoSlide() {
+            stopAutoSlide();
+            autoSlideTimer = setInterval(() => showSlide(currentSlideIndex + 1), 5000);
+        }
+
+        function stopAutoSlide() {
+            if (autoSlideTimer) clearInterval(autoSlideTimer);
+            autoSlideTimer = null;
+        }
+
+        function changeSlide(direction) {
+            stopAutoSlide();
+            showSlide(currentSlideIndex + direction);
+            startAutoSlide();
+        }
+
+        function goToSlide(index) {
+            stopAutoSlide();
+            showSlide(index);
+            startAutoSlide();
+        }
+
+        function initCarousel() {
+            const slides = getSlides();
+            const wrapper = document.querySelector('.hero-banner-carousel');
+            if (!slides.length || !wrapper) return;
+
+            wrapper.addEventListener('mouseenter', stopAutoSlide);
+            wrapper.addEventListener('mouseleave', startAutoSlide);
+
+            showSlide(0);
+            startAutoSlide();
+        }
+
+        document.addEventListener('DOMContentLoaded', initCarousel);
+    </script>
+
+    <footer class="site-footer">
+        <p>📍 District Police Headquarters, Alluri Seetharamaraju</p>
+        <p>📞 Emergency: 100 | Email: sp.asr123@gmail.com</p>
+        <p>&copy; 2025 Alluri Seetharamaraju Police</p>
+    </footer>
+</body>
+</html>

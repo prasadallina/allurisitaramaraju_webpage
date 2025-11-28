@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media - {{ district.name }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename=district.logo) }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Social Media Layout */
+.social-layout {
+  display: flex;
+  max-width: 800px;
+  margin: 48px auto 0;
+  background-color: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 18px rgba(30, 144, 194, 0.1);
+  min-height: 260px;
+  overflow: hidden;
+}
+
+/* Social Navigation Sidebar */
+.social-nav {
+  background: linear-gradient(180deg, #1e5631 60%, #3a8dde 100%);
+  min-width: 210px;
+  padding: 36px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.social-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.social-nav li {
+  margin-bottom: 18px;
+  width: 100%;
+}
+
+.social-nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ffd700;
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 12px 28px 12px 24px;
+  border-radius: 0 18px 18px 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.social-nav a:hover {
+  background-color: #fff;
+  color: #1e5631;
+}
+
+.social-nav i {
+  font-size: 1.5rem;
+  min-width: 28px;
+  text-align: center;
+}
+
+/* Social Content Area */
+.social-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 36px 18px;
+  text-align: center;
+}
+
+.social-title {
+  font-size: 2rem;
+  color: #1e5631;
+  font-weight: bold;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+
+.whatsapp-number {
+  font-size: 1.2rem;
+  color: #25d366;
+  font-weight: bold;
+  margin-top: 18px;
+  letter-spacing: 1px;
+}
+
+/* Responsive Styles */
+@media (max-width: 700px) {
+  .social-layout {
+    flex-direction: column;
+  }
+
+  .social-nav {
+    flex-direction: row;
+    width: 100%;
+    padding: 0;
+    justify-content: space-around;
+    align-items: stretch;
+    background: linear-gradient(90deg, #1e5631 60%, #3a8dde 100%);
+  }
+
+  .social-nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  .social-nav li {
+    margin: 0;
+  }
+
+  .social-nav a {
+    border-radius: 0;
+    padding: 12px 8px;
+    font-size: 1rem;
+    justify-content: center;
+  }
+
+  .social-content {
+    padding: 24px 8px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="logo-section">
+      <img src="{{ url_for('static', filename='img/AP-Police.png') }}" alt="AP Police Logo">
+    </div>
+    <div class="title-section">
+      <h1>{{ district.name | upper }}</h1>
+    </div>
+    <div class="logo-section">
+      <img src="{{ url_for('static', filename='img/Alluri_Sita_Rama_Raju-removebg-preview.png') }}" alt="District Emblem">
+    </div>
+  </header>
+
+  <!-- Navigation Menu -->
+  <nav class="navbar">
+    <ul>
+      {% for nav in navigation %}
+        <li><a href="{{ nav.link }}">{{ nav.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <div class="social-layout">
+      <nav class="social-nav">
+        <ul>
+          {% for social in social_links %}
+            <li><a href="{{ social.url }}" target="_blank"><i class="{{ social.icon }}"></i> {{ social.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+      <section class="social-content">
+        <div class="social-title">Connect With Us</div>
+        <div class="whatsapp-number">WhatsApp Number: {{ whatsapp_number }}</div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>📍 {{ footer.address }}</p>
+    <p>📞 Emergency: {{ footer.emergency }} | Email: {{ footer.email }}</p>
+    <p>&copy; {{ footer.copyright }}</p>
+  </footer>
+</body>
+</html>
