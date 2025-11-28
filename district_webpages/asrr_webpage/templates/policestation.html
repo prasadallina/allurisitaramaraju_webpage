@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ data.district.name }} - Police Station Contact List</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* === Theme Tokens === */
+    :root {
+      --brand-1: #1976d2;
+      --brand-2: #3b7a2a;
+      --gold: #a67c52;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --shadow: 0 6px 18px rgba(16, 24, 40, 0.08);
+      --radius: 14px;
+    }
+
+    /* === Contact Section === */
+    h2 {
+      text-align: center;
+      color: var(--ink);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin: clamp(16px, 2.5vw, 24px) 0;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(clamp(260px, 30vw, 300px), 1fr));
+      gap: clamp(16px, 2vw, 20px);
+      padding: clamp(16px, 2.5vw, 24px);
+      max-width: clamp(900px, 90vw, 1200px);
+      margin: 0 auto;
+    }
+
+    .contact-box {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(12px, 2vw, 20px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 1.5vw, 12px);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      opacity: 1;
+    }
+
+    .contact-box.hidden {
+      opacity: 0.3;
+      transform: scale(0.95);
+      pointer-events: none;
+    }
+
+    .contact-box.highlighted {
+      background: linear-gradient(90deg, #fff9e6, #fff7d6) !important;
+      border: 2px solid #ffca28 !important;
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 12px 30px rgba(255, 202, 40, 0.25) !important;
+      z-index: 10;
+    }
+
+    .contact-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .contact-box div {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: clamp(0.9rem, 1.8vw, 1rem);
+      color: var(--ink);
+    }
+
+    .contact-box div:first-child {
+      font-weight: 700;
+      color: var(--brand-1);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+    }
+
+    .contact-box div i {
+      color: var(--brand-2);
+      font-size: 1.2rem;
+    }
+
+    .contact-box div a {
+      color: var(--brand-1);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .contact-box div a:hover {
+      color: var(--ink);
+      text-decoration: underline;
+    }
+
+    .contact-box .location-highlight {
+      background: linear-gradient(90deg, #e6f3ea, #f0fdf4);
+      border-left: 3px solid var(--brand-2);
+      padding: clamp(6px, 1vw, 8px) clamp(8px, 1.5vw, 10px);
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .contact-box .location-highlight:hover {
+      background: linear-gradient(90deg, #d4e9d8, #e6f3ea);
+      transform: scale(1.02);
+    }
+
+    .contact-box .location-highlight i {
+      color: var(--brand-2);
+      font-size: clamp(1.2rem, 2vw, 1.4rem);
+    }
+
+    .map-link {
+      color: var(--brand-2);
+      text-decoration: none;
+      font-weight: 700;
+      padding-left: 4px;
+      font-size: clamp(0.95rem, 1.9vw, 1.1rem);
+      transition: color 0.2s ease;
+    }
+
+    .map-link:hover {
+      color: var(--ink);
+      text-decoration: underline;
+    }
+
+    .sdpo-section h3 {
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+      color: var(--ink);
+      margin-bottom: clamp(12px, 2vw, 16px);
+      text-align: center;
+      background: linear-gradient(90deg, #e0e8ff, #f5f7fb);
+      padding: clamp(8px, 1.5vw, 12px);
+      border-radius: 8px;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .label {
+      font-weight: 600;
+      color: var(--ink);
+      font-size: clamp(0.85rem, 1.6vw, 0.95rem);
+    }
+
+    /* === Search Bar === */
+    .search-bar-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+      padding: 0 16px;
+    }
+
+    .search-bar-container {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      padding: 8px 12px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      width: 100%;
+      max-width: 600px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .search-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      padding: 8px 0;
+      color: var(--ink);
+    }
+
+    .search-input::placeholder {
+      color: #9ca3af;
+    }
+
+    .search-clear {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 6px;
+      transition: color 0.2s;
+    }
+
+    .search-clear:hover {
+      color: var(--brand-1);
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .contact-container { grid-template-columns: 1fr; }
+      .search-bar-container { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="logo-section">
+      <img src="{{ data.district.logo }}" alt="AP Police Logo">
+    </div>
+    <div class="title-section">
+      <h1 class="highlight-title">{{ data.district.name }}</h1>
+    </div>
+    <div class="logo-section">
+      <img src="{{ data.district.emblem }}" alt="District Emblem">
+    </div>
+  </header>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+    <ul id="nav-links">
+      <li><a href="{{ url_for('index') }}">Home</a></li>
+      <li><a href="{{ url_for('about') }}">About Us</a></li>
+      <li><a href="{{ url_for('organization') }}">Organization</a></li>
+      <li><a href="{{ url_for('officers') }}">Officers</a></li>
+      <li><a href="{{ url_for('policestation') }}">Police Stations</a></li>
+      <li><a href="{{ url_for('contact') }}">Contact</a></li>
+      <li><a href="{{ url_for('wings') }}">Wings</a></li>
+      <li><a href="{{ url_for('services') }}">Services</a></li>
+    </ul>
+  </nav>
+
+  <h2>Police Station Contact Details</h2>
+
+  <!-- Search Bar -->
+  <div class="search-bar-wrapper">
+    <div class="search-bar-container">
+      <input type="search" id="search-bar" class="search-input" placeholder="Search police station..." aria-label="Search police station">
+      <button id="clear-search" class="search-clear" aria-label="Clear search">×</button>
+    </div>
+  </div>
+
+  <!-- SDPO Divisions -->
+  {% for division in data.sdpo_divisions %}
+    <section class="sdpo-section">
+      <h3>{{ division.name }}</h3>
+      <div class="contact-container">
+        {% for station in division.stations %}
+          <div class="contact-box" data-name="{{ station.name|lower }}">
+            <div><span class="label">Police Station:</span> {{ station.name }}</div>
+            <div><span class="label">Landline:</span> {{ station.landline }}</div>
+            <div><span class="label">Mobile Number:</span> {{ station.mobile }}</div>
+            <div><span class="label">Email ID:</span> <a href="mailto:{{ station.email }}">{{ station.email }}</a></div>
+            <div class="location-highlight">
+              <span class="label">Location:</span>
+              <a href="{{ station.map_link }}" class="map-link" target="_blank" rel="noopener">
+                View on Google Maps
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+  {% endfor %}
+
+  <!-- Search & Navbar Scripts -->
+  <script>
+    // Navbar Toggle
+    document.querySelector('.menu-toggle').addEventListener('click', () => {
+      document.querySelector('.navbar').classList.toggle('active');
+    });
+
+    // Search Logic
+    (function() {
+      const input = document.getElementById('search-bar');
+      const clearBtn = document.getElementById('clear-search');
+      const boxes = document.querySelectorAll('.contact-box');
+      let timeout = null;
+      let firstMatch = null;
+
+      function search() {
+        const query = input.value.trim().toLowerCase();
+        firstMatch = null;
+
+        boxes.forEach(box => {
+          const name = box.getAttribute('data-name') || '';
+          const matches = name.includes(query);
+
+          box.classList.toggle('highlighted', matches && query);
+          box.classList.toggle('hidden', !matches && query);
+
+          if (matches && query && !firstMatch) {
+            firstMatch = box;
+          }
+        });
+
+        if (firstMatch) {
+          firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+
+      input.addEventListener('input', () => {
+        clearTimeout(timeout);
+        timeout = setTimeout(search, 200);
+      });
+
+      clearBtn.addEventListener('click', () => {
+        input.value = '';
+        input.focus();
+        boxes.forEach(b => b.classList.remove('highlighted', 'hidden'));
+      });
+
+      input.addEventListener('keydown', e => {
+        if (e.key === 'Escape') clearBtn.click();
+      });
+    })();
+  </script>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>District Police Headquarters, Alluri Seetharamaraju</p>
+    <p>Emergency: 100 | Email: sp.asr123@gmail.com</p>
+    <p>&copy; 2025 Alluri Seetharamaraju Police</p>
+  </footer>
+
+</body>
+</html>

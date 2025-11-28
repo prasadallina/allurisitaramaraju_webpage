@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ data.district.name }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='img/AP-Police.png') }}">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+ 
+  .about-content {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 30px 30px 50px;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  .about-content h2 {
+    color: #0f4c81;
+    font-size: 1.8rem;
+    border-left: 6px solid #0f4c81;
+    padding-left: 12px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+  }
+
+  .about-content h2:hover {
+    color: #145ea8;
+  }
+
+  .about-content p {
+    font-size: 1.05rem;
+    color: #334155;
+    margin-bottom: 16px;
+    text-align: justify;
+  }
+
+  ul {
+    margin-left: 25px;
+    margin-bottom: 15px;
+    color: #374151;
+  }
+
+  ul li {
+    margin-bottom: 8px;
+    font-size: 1rem;
+    transition: transform 0.2s ease;
+  }
+
+  ul li:hover {
+    transform: translateX(4px);
+  }
+
+  .event {
+    background: linear-gradient(145deg, #f1f5f9 0%, #e2ecf8 100%);
+    padding: 14px 18px;
+    border-left: 5px solid #2563eb;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .event:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 14px rgba(37, 99, 235, 0.2);
+  }
+
+  h3 {
+    color: #1e40af;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  strong {
+    color: #0f172a;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  
+</style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="logo-section">
+      <img src="{{ url_for('static', filename='img/AP-Police.png') }}" alt="AP Police Logo">
+    </div>
+    <div class="title-section">
+      <h1>{{ data.district.name | upper }}</h1>
+    </div>
+    <div class="logo-section">
+      <img src="{{ url_for('static', filename='img/Alluri_Sita_Rama_Raju-removebg-preview.png') }}" alt="District Emblem">
+    </div>
+  </header>
+
+   <!-- Navbar Section -->
+    <nav class="navbar">
+        <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+        <ul id="nav-links">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
+            <li><a href="{{ url_for('organization') }}">Organization</a></li>
+            <li><a href="{{ url_for('officers') }}">Officers</a></li>
+            <li><a href="{{ url_for('policestation') }}">Police Stations</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('wings') }}">Wings</a></li>
+            <li><a href="{{ url_for('services') }}">Services</a></li>
+        </ul>
+    </nav>
+  <!-- Main Content -->
+  <main class="about-content">
+
+    <!-- District Overview -->
+    <section>
+      <h2>District Overview</h2>
+      <p><strong>Headquarters:</strong> {{ data.district.headquarters }}</p>
+      <p><strong>Formed on:</strong> {{ data.district.creation_date }}</p>
+      <p><strong>Geography:</strong> {{ data.district.geography }}</p>
+      <p>{{ data.district.background }}</p>
+    </section>
+
+    <!-- Historical Background -->
+    <section>
+      <h2>Historical Background</h2>
+      <p>
+        The district is named after <strong>Alluri Sitarama Raju</strong>, the legendary freedom fighter who led the
+        <strong>Rampa Rebellion ({{ data.history.rampa_rebellion.years }})</strong>.
+      </p>
+      <p>{{ data.history.rampa_rebellion.description }}</p>
+      <h3>Notable Incidents:</h3>
+      <ul>
+        {% for attack in data.history.rampa_rebellion.notable_attacks %}
+          <li>{{ attack }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <!-- Police Department Overview -->
+    <section>
+      <h2>Police Department Overview</h2>
+      <p>The {{ data.district.name }} focuses on serving the tribal and rural communities of the district.</p>
+
+      <h3>Goals:</h3>
+      <ul>
+        {% for goal in data.police_overview.goals %}
+          <li>{{ goal }}</li>
+        {% endfor %}
+      </ul>
+
+      <h3>Challenges:</h3>
+      <ul>
+        {% for challenge in data.police_overview.challenges %}
+          <li>{{ challenge }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <!-- Maoist Conflict -->
+    <section>
+      <h2>Maoist Conflict and Security Operations</h2>
+      <p>{{ data.maoist_conflict.conflict_nature }}</p>
+
+      <h3>Recent Events:</h3>
+      {% for event in data.maoist_conflict.recent_events %}
+        <div class="event">
+          <strong>{{ event.date }}:</strong> {{ event.event }} — {{ event.details }}
+        </div>
+      {% endfor %}
+
+      <h3>Arms Cache Seizures:</h3>
+      <ul>
+        {% for seizure in data.maoist_conflict.arms_cache_seizures %}
+          <li><strong>{{ seizure.date }}</strong> – {{ seizure.location }}: {{ seizure.items }}</li>
+        {% endfor %}
+      </ul>
+
+      <h3>Militia Surrenders:</h3>
+      <p><strong>{{ data.maoist_conflict.militia_surrenders.date }}</strong> – {{ data.maoist_conflict.militia_surrenders.description }}</p>
+    </section>
+
+  </main>
+
+  <script>
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      document.querySelector('.navbar').classList.toggle('active');
+    });
+  </script>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>📍 District Police Headquarters, {{ data.district.headquarters }}</p>
+    <p>📞 Emergency: 100 | Email: sp.asr123@gmail.com</p>
+    <p>&copy; 2025 Alluri Seetharamaraju District Police</p>
+  </footer>
+
+</body>
+</html>

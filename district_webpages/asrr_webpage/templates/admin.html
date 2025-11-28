@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Guntur District Police</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* New Color Palette: Professional & Modern */
+    :root {
+        --primary-color: #007bff; /* Bright Blue */
+        --secondary-color: #6c757d; /* Grey */
+        --accent-color: #28a745; /* Green for success/add */
+        --danger-color: #dc3545; /* Red for remove/logout */
+        --background-color: #e9ecef; /* Light Grey Background */
+        --card-background: #ffffff;
+        --text-color: #343a40; /* Dark text */
+        --sidebar-bg: #343a40; /* Dark Sidebar */
+        --sidebar-link-hover: #495057;
+    }
+
+    body {
+        font-family: 'Roboto', sans-serif; /* Changed font for modern look */
+        background-color: var(--background-color);
+        color: var(--text-color);
+        margin: 0;
+        padding: 0;
+    }
+
+    /* 1. Sidebar Styles */
+    .sidebar {
+        background-color: var(--sidebar-bg);
+        min-height: 100vh;
+        position: fixed;
+        width: 260px;
+        padding: 10px 0;
+        box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+        color: #f8f9fa;
+        display: flex;
+        flex-direction: column;
+        z-index: 1000;
+        overflow-y: auto;
+    }
+
+    .sidebar-content {
+        padding: 0 15px; /* Reduced side padding */
+        flex: 1 1 auto;
+        overflow-y: auto;
+    }
+
+    .sidebar h4 {
+        color: var(--primary-color);
+        margin-bottom: 20px; /* Slightly reduced */
+        padding: 0 20px;
+        font-weight: 500;
+        font-size: 1.5rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 15px;
+    }
+
+    .sidebar .nav-link {
+        color: rgba(255, 255, 255, 0.85);
+        padding: 8px 10px; /* ***KEY CHANGE: Reduced padding*** */
+        border-radius: 4px;
+        margin-bottom: 2px; /* ***KEY CHANGE: Reduced gap between items*** */
+        transition: background-color 0.2s, color 0.2s, transform 0.2s;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+    }
+
+    .sidebar .nav-link i {
+        font-size: 1.1rem;
+    }
+
+    .sidebar .nav-link:hover {
+        background-color: var(--sidebar-link-hover);
+        color: #ffffff;
+        transform: translateX(3px); /* Reduced slide effect */
+    }
+
+    .sidebar .nav-link.active {
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-weight: 500;
+        box-shadow: 0 1px 3px rgba(0, 123, 255, 0.3); /* Reduced shadow */
+    }
+    
+    /* Logout Button Styling */
+    .sidebar .logout-container {
+        padding: 15px; /* Reduced padding */
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .sidebar .btn-logout {
+        width: 100%;
+        font-weight: 500;
+        background-color: var(--danger-color);
+        border: none;
+        border-radius: 6px;
+        padding: 10px; /* Reduced padding */
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .sidebar .btn-logout:hover {
+        background-color: #c82333;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* 2. Content Area Styles */
+    .content {
+        margin-left: 260px;
+        padding: 30px;
+        min-height: 100vh;
+        background-color: var(--background-color);
+    }
+
+    #section-title {
+        color: var(--primary-color);
+        margin-bottom: 30px;
+        font-weight: 600;
+        font-size: 2rem;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #ced4da;
+    }
+
+    /* 3. Card/Form Styles */
+    #editor-form, .json-viewer {
+        background-color: var(--card-background);
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+        margin-bottom: 25px;
+    }
+
+    .json-viewer pre {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 6px;
+        max-height: 400px;
+        overflow-y: auto;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border: 1px solid #e9ecef;
+    }
+
+    /* 4. Form Controls */
+    .form-group {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #f0f0f0;
+        border-radius: 5px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+        color: var(--text-color);
+        font-size: 0.95rem;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="file"],
+    .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+        font-size: 1rem;
+        box-sizing: border-box;
+    }
+
+    .form-group textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    .form-group input[type="text"]:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    /* 5. Array/Item Styles */
+    .array-container {
+        border-left: 4px solid var(--primary-color);
+        padding-left: 15px;
+        margin-left: 5px;
+        margin-top: 15px;
+    }
+
+    .array-item {
+        background-color: #f8f9fa;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 6px;
+        border: 1px solid #dee2e6;
+        position: relative;
+    }
+    
+    .array-item h5 {
+        color: var(--primary-color);
+        margin-top: 0;
+        margin-bottom: 15px;
+        padding-bottom: 5px;
+        border-bottom: 1px dashed #ced4da;
+        font-size: 1.1rem;
+    }
+
+    .img-preview {
+        max-width: 100px;
+        height: auto;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        border: 1px solid #ced4da;
+        object-fit: cover;
+    }
+
+    /* 6. Buttons */
+    .btn {
+        display: inline-block;
+        font-weight: 400;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        user-select: none;
+        border: 1px solid transparent;
+        line-height: 1.5;
+        border-radius: 0.25rem;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+    
+    .btn-add {
+        background-color: var(--accent-color);
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        font-size: 0.95rem;
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
+    
+    .btn-add:hover {
+        background-color: #1e7e34;
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        font-size: 1.05rem;
+        font-weight: 600;
+        box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-danger {
+        background-color: var(--danger-color);
+        color: white;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+    .btn-toggle-viewer {
+        background-color: var(--secondary-color);
+        color: #ffffff;
+        padding: 8px 15px;
+        margin-bottom: 15px;
+        font-size: 0.9rem;
+    }
+
+    .btn-toggle-viewer:hover {
+        background-color: #5a6268;
+    }
+
+    /* 7. Responsive adjustments */
+    @media screen and (max-width: 768px) {
+        .sidebar {
+            width: 100%;
+            height: auto;
+            position: relative;
+            padding: 15px 0;
+        }
+        .sidebar-content {
+             display: flex;
+             flex-wrap: wrap; /* Added for responsiveness */
+             gap: 5px; /* Minimal gap between wrapped items on mobile */
+             padding: 0 15px;
+        }
+        .sidebar .nav-link {
+            padding: 8px 10px;
+            margin-bottom: 2px;
+            font-size: 0.9rem;
+            flex-grow: 1; /* Allows links to share horizontal space */
+        }
+        .content {
+            margin-left: 0;
+            padding: 15px;
+        }
+        .sidebar h4, .sidebar .logout-container {
+            padding: 0 15px;
+        }
+        #section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="sidebar">
+        <h4>Admin Dashboard</h4>
+        <div class="sidebar-content">
+            <ul class="nav flex-column">
+                <li class="nav-item"><a class="nav-link" data-section="home"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-item"><a class="nav-link" data-section="about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li class="nav-item"><a class="nav-link" data-section="contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li class="nav-item"><a class="nav-link" data-section="officers"><i class="fas fa-users"></i> Officers</a></li>
+                <li class="nav-item"><a class="nav-link" data-section="organization"><i class="fas fa-sitemap"></i> Organization</a></li>
+                <li class="nav-item"><a class="nav-link" data-section="policestation"><i class="fas fa-shield-alt"></i> Police Stations</a></li>
+                <li class="nav-item"><a class="nav-link" data-section="services"><i class="fas fa-cogs"></i> Services</a></li>
+                <li class="nav-item"><a class="nav-link" data-section="socialmedia"><i class="fas fa-share-alt"></i> Social Media</a></li>
+                <li class="nav-item"><a class="nav-link" data-section="wings"><i class="fas fa-layer-group"></i> Wings</a></li>
+                <li class="nav-item"><a class="nav-link" data-section="gallery"><i class="fas fa-image"></i> Gallery</a></li>
+            </ul>
+        </div>
+        <a href="/logout" class="btn btn-danger mt-3"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+    <div class="content">
+        <h2 id="section-title">Select a section to edit</h2>
+        <button id="toggle-viewer" class="btn btn-toggle-viewer">Show JSON Viewer</button>
+        <div class="json-viewer" id="viewer-container" style="display: none;">
+            <h4>Current Data</h4>
+            <pre id="json-display"></pre>
+        </div>
+        <div id="editor-form"></div>
+        <button id="save-btn" class="btn btn-primary mt-3" style="display: none;">Save Changes</button>
+    </div>
+<script>
+let currentSection = null;
+let currentData = null;
+
+function isImageUrl(value) {
+    return typeof value === "string" && /\.(jpg|jpeg|png|gif|webp)$/i.test(value);
+}
+
+function renderEditor(data, parentKey = "", container) {
+    for (let key in data) {
+        const value = data[key];
+        const fullKey = parentKey ? `${parentKey}.${key}` : key;
+        const group = document.createElement("div");
+        group.className = "form-group";
+
+        const labelText = key
+            .replace(/([A-Z])/g, " $1")
+            .replace(/^./, (str) => str.toUpperCase());
+        const label = document.createElement("label");
+        label.textContent = labelText;
+        group.appendChild(label);
+
+        // ✅ CASE 1: Array of image paths (Gallery)
+        // Note: Checking for Array of strings/objects here to handle both old array of strings and new array of objects.
+        if (Array.isArray(value) && value.every(item => typeof item === 'string' && (isImageUrl(item) || item === ""))) {
+            const arrayContainer = document.createElement("div");
+            arrayContainer.className = "array-container";
+
+            value.forEach((item, index) => {
+                const itemDiv = document.createElement("div");
+                itemDiv.className = "array-item";
+                const itemKey = `${fullKey}[${index}]`;
+
+                // Show image preview ONLY if the URL is not empty
+                if (item) {
+                    const img = document.createElement("img");
+                    img.src = item.startsWith("http") ? item : `/${item}`;
+                    img.className = "img-preview";
+                    itemDiv.appendChild(img);
+                }
+
+                // File upload input
+                const input = document.createElement("input");
+                input.type = "file";
+                input.accept = "image/*";
+                input.dataset.key = itemKey;
+                input.addEventListener("change", handleImageUpload);
+                itemDiv.appendChild(input);
+
+                // Remove button
+                const removeBtn = document.createElement("button");
+                removeBtn.className = "btn btn-sm btn-danger mt-2";
+                removeBtn.textContent = "Remove Image";
+                removeBtn.addEventListener("click", (e) => { e.preventDefault(); removeArrayItem(fullKey, index); });
+                itemDiv.appendChild(removeBtn);
+
+                arrayContainer.appendChild(itemDiv);
+            });
+
+            // Add new empty upload slot
+            const addBtn = document.createElement("button");
+            addBtn.className = "btn btn-sm btn-success btn-add";
+            addBtn.textContent = "Add Image";
+            addBtn.addEventListener("click", (e) => { e.preventDefault(); addArrayItem(fullKey, true); });
+            
+            group.appendChild(arrayContainer);
+            group.appendChild(addBtn);
+        }
+
+        // ✅ CASE 2: Array of strings
+        else if (Array.isArray(value) && value.every((item) => typeof item === "string")) {
+            const textarea = document.createElement("textarea");
+            textarea.value = value.join("\n");
+            textarea.rows = Math.max(5, value.length);
+            textarea.dataset.key = fullKey;
+            textarea.addEventListener("input", handleInputChange);
+            group.appendChild(textarea);
+        }
+
+        // ✅ CASE 3: Array of objects (This is where Officers/Stations/Gallery items are handled)
+        else if (Array.isArray(value)) {
+            label.textContent = `${labelText} (Array)`;
+            const arrayContainer = document.createElement("div");
+            arrayContainer.className = "array-container";
+            value.forEach((item, index) => {
+                const itemDiv = document.createElement("div");
+                itemDiv.className = "array-item";
+                const itemKey = `${fullKey}[${index}]`;
+                
+                // Add an H5 for array item identification
+                const itemHeader = document.createElement('h5');
+                itemHeader.textContent = `Item ${index + 1}`
+                // Display name property if available (e.g., Officer/Station name) or alt for gallery
+                if (item.name) itemHeader.textContent += `: ${item.name}`;
+                else if (item.alt) itemHeader.textContent += `: ${item.alt}`; // Added for Gallery Alt text
+                
+                itemDiv.appendChild(itemHeader);
+                
+                renderEditor(item, itemKey, itemDiv);
+
+                const removeBtn = document.createElement("button");
+                removeBtn.className = "btn btn-sm btn-danger mt-2";
+                removeBtn.textContent = "Remove Item";
+                removeBtn.addEventListener("click", (e) => { e.preventDefault(); removeArrayItem(fullKey, index); });
+                itemDiv.appendChild(removeBtn);
+                arrayContainer.appendChild(itemDiv);
+            });
+            group.appendChild(arrayContainer);
+
+            // Add new blank entry
+            const addBtn = document.createElement("button");
+            addBtn.className = "btn btn-sm btn-success btn-add";
+            addBtn.textContent = "Add Item";
+            addBtn.addEventListener("click", (e) => { e.preventDefault(); addArrayItem(fullKey); });
+            group.appendChild(addBtn);
+        }
+
+        // ✅ CASE 4: Nested object
+        else if (typeof value === "object" && value !== null) {
+            const objContainer = document.createElement("div");
+            objContainer.style.paddingLeft = "20px";
+            renderEditor(value, fullKey, objContainer);
+            group.appendChild(objContainer);
+        }
+
+        // ✅ CASE 5: Single string or number (including photoUrl within an object)
+        else if (typeof value === "string" || typeof value === "number") {
+            // Check if it's an image URL for display/upload
+            // Also check if the key is 'src' to handle gallery objects
+            if (isImageUrl(value) || (key.toLowerCase().includes('photo') || key.toLowerCase() === 'src')) {
+                // Label for the image upload field
+                label.textContent = `${labelText} (Photo/Image)`; 
+                
+                // Show image preview ONLY if value is not empty
+                if (value) {
+                    const img = document.createElement("img");
+                    img.src = value.startsWith("http") ? value : `/${value}`;
+                    img.className = "img-preview";
+                    group.appendChild(img);
+                }
+
+                const input = document.createElement("input");
+                input.type = "file";
+                input.accept = "image/*";
+                input.dataset.key = fullKey;
+                input.addEventListener("change", handleImageUpload);
+                group.appendChild(input);
+            } else {
+                // Regular text input
+                const input = document.createElement("input");
+                input.type = "text";
+                input.value = value;
+                input.dataset.key = fullKey;
+                input.addEventListener("input", handleInputChange);
+                group.appendChild(input);
+            }
+        }
+
+        container.appendChild(group);
+    }
+}
+
+// 🧩 Input and image handling
+function handleInputChange(e) {
+    const key = e.target.dataset.key;
+    if (Array.isArray(getValueByKey(currentData, key))) {
+        const lines = e.target.value.split("\n").filter((line) => line.trim() !== "");
+        setValueByKey(currentData, key, lines);
+    } else {
+        setValueByKey(currentData, key, e.target.value);
+    }
+    updateJsonDisplay();
+}
+
+async function handleImageUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+        const response = await fetch("/admin/upload_image", { method: "POST", body: formData });
+        if (response.ok) {
+            const { url } = await response.json();
+            const key = e.target.dataset.key;
+            // Normalize URL format
+            const normalizedUrl = url.replace("/static/", "static/"); 
+            
+            setValueByKey(currentData, key, normalizedUrl);
+            reRenderEditor();
+            alert("✅ Image uploaded successfully! Remember to Save Changes.");
+        } else alert("❌ Upload failed");
+    } catch {
+        alert("⚠️ Error uploading image");
+    }
+}
+
+// 🧩 Helpers (No changes needed here)
+function setValueByKey(obj, key, value) {
+    const parts = key.split(/[\.\[\]]+/).filter(Boolean);
+    let current = obj;
+    for (let i = 0; i < parts.length - 1; i++) {
+        const part = parts[i];
+        if (!current[part]) {
+            current[part] = isNaN(parseInt(parts[i+1])) ? {} : [];
+        }
+        current = current[part];
+    }
+    const finalPart = isNaN(parseInt(parts[parts.length - 1])) ? parts[parts.length - 1] : parseInt(parts[parts.length - 1]);
+    current[finalPart] = value;
+}
+
+function getValueByKey(obj, key) {
+    const parts = key.split(/[\.\[\]]+/).filter(Boolean);
+    let current = obj;
+    for (let part of parts) {
+        const currentPart = isNaN(parseInt(part)) ? part : parseInt(part);
+        current = current[currentPart];
+        if (current === undefined) return undefined;
+    }
+    return current;
+}
+
+// ✅ Add item or image (Uses Templates)
+function addArrayItem(key, isGallery = false) {
+    const array = getValueByKey(currentData, key);
+    if (!Array.isArray(array)) return;
+
+    let newItem;
+    // Check the top-level section key (e.g., 'policestations' instead of 'policestations[0]')
+    const topLevelKey = key.split(/[\.\[\]]+/).filter(Boolean)[0];
+
+    // If this is a simple image array (not gallery), just add an empty string
+    if (isGallery && Array.isArray(array) && array.every(item => typeof item === 'string' || item === '')) {
+        newItem = "";
+    } else if (isGallery || topLevelKey === 'gallery') {
+        // Use Object structure to include 'alt' and 'src' fields for proper rendering
+        newItem = {
+            alt: "New Gallery Item",
+            src: "" // Empty string will show the 'Choose File' field
+        };
+    } else if (topLevelKey === 'policestations') {
+        newItem = {
+            name: 'New Police Station',
+            contactNumber: '00000-00000',
+            address: 'Enter Full Address',
+            latLong: '16.9999, 82.2500', 
+            incharge: {
+                name: 'Station Head Name',
+                designation: 'Sub Inspector',
+                photoUrl: 'static/img/placeholder_officer.jpg' // Nested photo URL
+            }
+        };
+    } else if (topLevelKey === 'officers') {
+         newItem = {
+            name: 'New Officer Name',
+            designation: 'New Designation',
+            phone: '0000000000',
+            email: 'officer@example.com',
+           
+        };
+    } else if (topLevelKey === 'services') {
+  // For services
+
+  newItem = {
+    icon: "📜",
+    name: "New Service Name",
+    url: "https://example.com"
+  };
+
+  } else if (topLevelKey === 'wings') {
+  // For wings
+  newItem = {
+    title: "New Wing Title",
+    description: "Enter wing description here..."
+  };
+    } else if (array.length > 0 && typeof array[0] === "object") {
+        // Fallback: Clone structure of first object and empty fields
+        newItem = {};
+        for (const k in array[0]) {
+            if (typeof array[0][k] === 'object' && array[0][k] !== null && !Array.isArray(array[0][k])) {
+                 // Deep clone nested objects
+                 newItem[k] = JSON.parse(JSON.stringify(array[0][k]));
+                 // Empty sub-fields (This part is crucial for nested items like 'incharge' in policestations)
+                 for(let subK in newItem[k]) newItem[k][subK] = newItem[k][subK].includes('url') ? "static/img/placeholder.jpg" : ""; 
+            }
+             else {
+                // Ensure URL/Image fields get a placeholder URL or empty string
+                newItem[k] = k.toLowerCase().includes('url') || k.toLowerCase().includes('image') || k.toLowerCase() === 'src' ? "static/img/placeholder.jpg" : ""; 
+            }
+        }
+    } else {
+        newItem = "";
+    }
+
+    array.push(newItem);
+    reRenderEditor();
+}
+
+function removeArrayItem(key, index) {
+    const array = getValueByKey(currentData, key);
+    if (Array.isArray(array)) {
+        if(confirm(`Are you sure you want to remove item at index ${index + 1}?`)){
+            array.splice(index, 1);
+            reRenderEditor();
+        }
+    }
+}
+
+function reRenderEditor() {
+    const editorForm = document.getElementById("editor-form");
+    editorForm.innerHTML = "";
+    renderEditor(currentData, "", editorForm);
+    updateJsonDisplay();
+}
+
+function updateJsonDisplay() {
+    document.getElementById("json-display").textContent = JSON.stringify(currentData, null, 2);
+}
+
+// ✅ Load and save data
+async function loadSection(section) {
+    currentSection = section;
+    document.querySelectorAll(".nav-link").forEach((l) => l.classList.remove("active"));
+    document.querySelector(`.nav-link[data-section="${section}"]`).classList.add("active");
+
+    document.getElementById("section-title").textContent = `${section.charAt(0).toUpperCase() + section.slice(1)} Editor`;
+    const editorForm = document.getElementById("editor-form");
+    editorForm.innerHTML = "";
+    document.getElementById("json-display").textContent = "";
+    document.getElementById("viewer-container").style.display = "none";
+    document.getElementById("save-btn").style.display = "block";
+
+    try {
+        const response = await fetch(`/admin/data/${section}`);
+        if (response.ok) {
+            currentData = await response.json();
+            renderEditor(currentData, "", editorForm);
+            updateJsonDisplay();
+        } else editorForm.innerHTML = `<p class='text-danger'>Error loading data. Status: ${response.status}</p>`;
+    } catch (err) {
+        editorForm.innerHTML = "<p class='text-danger'>Error loading data</p>";
+        console.error("Fetch error:", err);
+    }
+}
+
+async function saveChanges() {
+    if (!currentSection || !currentData) return;
+    document.getElementById('save-btn').textContent = 'Saving...';
+    document.getElementById('save-btn').disabled = true;
+
+    try {
+        const response = await fetch(`/admin/save/${currentSection}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(currentData),
+        });
+        alert(response.ok ? "✅ Changes saved successfully!" : `❌ Error saving changes. Status: ${response.status}`);
+    } catch {
+        alert("⚠️ Error saving changes");
+    } finally {
+        document.getElementById('save-btn').textContent = 'Save Changes';
+        document.getElementById('save-btn').disabled = false;
+    }
+}
+
+// ✅ JSON viewer toggle + events
+document.getElementById("toggle-viewer").addEventListener("click", () => {
+    const viewer = document.getElementById("viewer-container");
+    const toggle = document.getElementById("toggle-viewer");
+    const visible = viewer.style.display === "block";
+    viewer.style.display = visible ? "none" : "block";
+    toggle.textContent = visible ? "Show JSON Viewer" : "Hide JSON Viewer";
+});
+
+document.querySelectorAll(".nav-link").forEach((link) => {
+    link.addEventListener("click", (e) => {
+        const section = e.currentTarget.dataset.section;
+        if (section) loadSection(section);
+    });
+});
+
+document.getElementById("save-btn").addEventListener("click", saveChanges);
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadSection('home');
+});
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

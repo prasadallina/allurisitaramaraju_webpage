@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* ------------------- Base Styles ------------------- */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto 20px auto;
+      width: 60px;
+      border-radius: 12px;
+    }
+
+    .login-section {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .login-section h2 {
+      color: #1e3c72;
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .success, .danger, .info {
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .success { background: #d4edda; color: #155724; }
+    .danger { background: #f8d7da; color: #721c24; }
+    .info { background: #d1ecf1; color: #0c5460; }
+
+    .login-section form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .login-section label {
+      text-align: left;
+      color: #333;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .login-section input {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .login-section input:focus {
+      border-color: #1e3c72;
+      box-shadow: 0 0 5px rgba(30, 60, 114, 0.3);
+      outline: none;
+    }
+
+    .checkbox-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      justify-content: flex-start;
+    }
+
+    .show-password-checkbox {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: #1e3c72;
+    }
+
+    .checkbox-label {
+      font-size: 13px;
+      color: #666;
+      cursor: pointer;
+      margin: 0;
+      user-select: none;
+    }
+
+    .checkbox-label:hover {
+      color: #1e3c72;
+    }
+
+    .login-section button {
+      background: #1e3c72;
+      color: #fff;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .login-section button:hover {
+      background: #2a5298;
+      transform: translateY(-2px);
+    }
+
+    .login-section button:active {
+      transform: translateY(0);
+    }
+
+    .change-password-link {
+      background: #fff;
+      border: none;
+      color: #020d22ff;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: underline;
+      margin-top: 15px;
+      transition: color 0.2s;
+    }
+
+    .change-password-link:hover {
+      color: #02122fff;
+    }
+
+    @media (max-width: 480px) {
+      .login-section {
+        padding: 20px;
+        margin: 20px;
+      }
+    }
+
+    /* ------------------- Modal Styles ------------------- */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .modal.hidden {
+      display: none;
+    }
+
+    .modal-content {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 400px;
+      animation: slideUp 0.3s ease-in-out;
+    }
+
+    @keyframes slideUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #f0f0f0;
+      padding-bottom: 15px;
+    }
+
+    .modal-header h3 {
+      margin: 0;
+      color: #1e3c72;
+      font-size: 20px;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: #999;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover {
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      text-align: left;
+      color: #333;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 14px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .form-group input:focus {
+      border-color: #1e3c72;
+      box-shadow: 0 0 5px rgba(30, 60, 114, 0.3);
+      outline: none;
+    }
+
+    .form-group .checkbox-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+      justify-content: flex-start;
+    }
+
+    .form-group .show-password-checkbox {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      accent-color: #1e3c72;
+    }
+
+    .form-group .checkbox-label {
+      font-size: 12px;
+      color: #666;
+      cursor: pointer;
+      margin: 0;
+      user-select: none;
+    }
+
+    .form-group .checkbox-label:hover {
+      color: #1e3c72;
+    }
+
+    .modal-submit {
+      width: 100%;
+      background: #1e3c72;
+      color: #fff;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      margin-top: 10px;
+    }
+
+    .modal-submit:hover {
+      background: #2a5298;
+      transform: translateY(-2px);
+    }
+
+    .modal-submit:active {
+      transform: translateY(0);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .danger.hidden {
+      display: none;
+    }
+
+    @media (max-width: 480px) {
+      .modal-content {
+        width: 90%;
+        padding: 20px;
+      }
+
+      .modal-header h3 {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section class="login-section">
+    <img src="static/img/Alluri_Sita_Rama_Raju-removebg-preview.png" alt="Logo">
+    <h2>Admin Login</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <div class="checkbox-wrapper">
+        <input type="checkbox" id="showLoginPassword" class="show-password-checkbox">
+        <label for="showLoginPassword" class="checkbox-label">Show Password</label>
+      </div>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <button type="button" id="change-password-btn" class="change-password-link">Change Password</button>
+  </section>
+
+ <!-- ------------------- Change Password Modal ------------------- -->
+<div id="changePasswordModal" class="modal hidden">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Change Password</h3>
+      <button type="button" class="modal-close" id="closeModal">&times;</button>
+    </div>
+
+    <form id="changePasswordForm" method="POST" action="{{ url_for('change_password') }}">
+      <div class="form-group">
+        <label for="currentPassword">Current Password:</label>
+        <input type="password" id="currentPassword" name="currentPassword" required>
+      </div>
+
+      <div class="form-group">
+        <label for="newPassword">New Password:</label>
+        <input type="password" id="newPassword" name="newPassword" required>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required>
+      </div>
+
+      <!-- ✅ Show All Passwords Checkbox -->
+      <div class="checkbox-wrapper" style="margin-top:10px; text-align:left;">
+        <input type="checkbox" id="showAllPasswords" class="show-password-checkbox">
+        <label for="showAllPasswords" class="checkbox-label" style="cursor:pointer;">Show All Passwords</label>
+      </div>
+
+      <div id="passwordError" class="danger hidden"></div>
+      <button type="submit" class="modal-submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+<!-- ------------------- JavaScript ------------------- -->
+<script>
+  const changePasswordBtn = document.getElementById('change-password-btn');
+  const changePasswordModal = document.getElementById('changePasswordModal');
+  const closeModalBtn = document.getElementById('closeModal');
+  const changePasswordForm = document.getElementById('changePasswordForm');
+  const passwordError = document.getElementById('passwordError');
+
+  // Open modal
+  changePasswordBtn.addEventListener('click', () => changePasswordModal.classList.remove('hidden'));
+
+  // Close modal
+  function closeModal() {
+    changePasswordModal.classList.add('hidden');
+    changePasswordForm.reset();
+    passwordError.classList.add('hidden');
+    document.getElementById('showAllPasswords').checked = false;
+    toggleAllPasswords(false);
+  }
+
+  closeModalBtn.addEventListener('click', closeModal);
+  changePasswordModal.addEventListener('click', e => { if (e.target === changePasswordModal) closeModal(); });
+
+  // ✅ Show All Passwords Logic
+  function toggleAllPasswords(show) {
+    ['currentPassword', 'newPassword', 'confirmPassword'].forEach(id => {
+      const input = document.getElementById(id);
+      input.type = show ? 'text' : 'password';
+    });
+  }
+
+  document.getElementById('showAllPasswords').addEventListener('change', function() {
+    toggleAllPasswords(this.checked);
+  });
+
+  // ✅ Validate and submit password change form
+  changePasswordForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const newPass = document.getElementById('newPassword').value;
+    const confirmPass = document.getElementById('confirmPassword').value;
+
+    if (newPass !== confirmPass) {
+      passwordError.textContent = 'New password and confirm password do not match!';
+      passwordError.classList.remove('hidden');
+      return;
+    }
+
+    if (newPass.length < 6) {
+      passwordError.textContent = 'Password must be at least 6 characters long!';
+      passwordError.classList.remove('hidden');
+      return;
+    }
+
+    this.submit();
+  });
+</script>
+
+</body>
+</html>

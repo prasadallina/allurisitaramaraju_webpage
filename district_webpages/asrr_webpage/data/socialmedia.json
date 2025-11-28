@@ -1,0 +1,31 @@
+{
+  "district": {
+    "name": "ALLURI SEETHARAMARAJU DISTRICT POLICE",
+    "logo": "static/img/AP-Police.png",
+    "emblem": "static/img/Alluri_Sita_Rama_Raju-removebg-preview.png"
+  },
+  "navigation": [
+    {"title": "Home", "link": "index.html"},
+    {"title": "About Us", "link": "about.html"},
+    {"title": "Organization", "link": "organization.html"},
+    {"title": "Officers", "link": "officers.html"},
+    {"title": "Police Station", "link": "policestation.html"},
+    {"title": "Contact", "link": "contact.html"},
+    {"title": "Wings", "link": "wings.html"},
+    {"title": "Services", "link": "services.html"}
+  ],
+  "social_links": [
+    {"name": "Facebook", "url": "https://www.facebook.com/people/ASRDistrictPolice/100080459076358/", "icon": "fab fa-facebook-f"},
+    {"name": "Instagram", "url": "https://www.instagram.com/asr_distpolice/", "icon": "fab fa-instagram"},
+    {"name": "Twitter", "url": "https://x.com/Asrpolice100", "icon": "fab fa-twitter"},
+    {"name": "WhatsApp Channel", "url": "https://whatsapp.com/channel/0029VaF1vQeK0QK1QK1QK1", "icon": "fab fa-whatsapp"},
+    {"name": "YouTube Channel", "url": "https://www.youtube.com/@allurisitharamarajudistric9397/videos", "icon": "fab fa-youtube"}
+  ],
+  "whatsapp_number": "9381123100",
+  "footer": {
+    "address": "District Police Headquarters, ASR District",
+    "emergency": "100",
+    "email": "sp.asr123@gmail.com",
+    "copyright": "2025 ASR District Police"
+  }
+}

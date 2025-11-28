@@ -1,0 +1,96 @@
+{
+  "district": {
+    "name":"ALLURI SEETHARAMARAJU DISTRICT POLICE",
+    "logo": "static/img/AP-Police.png",
+    "emblem": "static/img/Alluri_Sita_Rama_Raju-removebg-preview.png"
+  },
+  "organization": [
+    {
+      "title": "Superintendent of Police",
+      "members": [
+        "Addl. SP (Admin), ASR Dist.",
+        "Addl. SP (AR)",
+        "AR DSP, ASR",
+        "RI, OPRNS",
+        "RSI MTO, ASR"
+      ]
+    },
+    {
+      "title": "SDPO - Paderu",
+      "members": [
+        {
+          "name": "CI, Paderu",
+          "subordinates": [
+            "SI, Paderu PS",
+            "SI, Hukumapeta PS",
+            "SI, Pedabayalu PS",
+            "SI, Munchingput PS"
+          ]
+        },
+        {
+          "name": "CI, Araku",
+          "subordinates": [
+            "SI, Araku PS",
+            "SI, Ananthagiri PS",
+            "SI, Dumbriguda PS"
+          ]
+        },
+        {
+          "name": "CI, G. Madugula",
+          "subordinates": ["SI, G. Madugula PS"]
+        }
+      ]
+    },
+    {
+      "title": "SDPO - Chinthapalli",
+      "members": [
+        {
+          "name": "CI, Chintapalli",
+          "subordinates": ["SI, Chinthapalli PS", "SI, Annavaram PS"]
+        },
+        {
+          "name": "CI, G.K. Veedhi",
+          "subordinates": ["SI, G.K. Veedhi PS", "SI, Sileru PS"]
+        },
+        {
+          "name": "CI, Koyyuru",
+          "subordinates": ["SI, Koyyuru PS", "SI, Mampa PS"]
+        }
+      ]
+    },
+    {
+      "title": "SDPO - Rampachodavaram",
+      "members": [
+        {
+          "name": "CI, Rampachodavaram",
+          "subordinates": ["Rampachodavaram PS", "Devipatnam PS"]
+        },
+        {
+          "name": "CI, Addateegala",
+          "subordinates": ["Addateegala PS", "Gangavaram PS", "Y. Ramavaram PS", "Ducharti PS"]
+        },
+        {
+          "name": "CI, Maredumilli",
+          "subordinates": ["Maredumilli PS", "SI, Gurthedu PS"]
+        },
+        {
+          "name": "CI, Rajavomangi",
+          "subordinates": ["Rajavomangi PS", "Jaddangi PS"]
+        }
+      ]
+    },
+    {
+      "title": "SDPO - Chinturu",
+      "members": [
+        {
+          "name": "CI, Chinturu",
+          "subordinates": ["SI, Chinturu PS", "Donkarai PS", "Mothugudem PS"]
+        },
+        {
+          "name": "CI, Yetapaka",
+          "subordinates": ["SI, Yetapaka PS", "SI, Kunavaram PS", "SI, V.R. Puram PS"]
+        }
+      ]
+    }
+  ]
+}

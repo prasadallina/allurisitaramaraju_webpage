@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SP Office Organization Chart - {{ district.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ========================================= */
+        /* === Organization Layout Styles (NEW) === */
+        /* ========================================= */
+
+        /* కొత్త Flex కంటైనర్ - ఇది 3 మరియు 2 లేఅవుట్‌ను నిర్వహిస్తుంది */
+        .organization-wrapper {
+            display: flex;
+            flex-wrap: wrap; /* బాక్సులు కింద లైన్‌కు వెళ్ళడానికి */
+            gap: 20px; /* బాక్సుల మధ్య దూరం */
+            padding: 20px; /* మొత్తం సెక్షన్‌కు ప్యాడింగ్ */
+            max-width: 1200px; /* పెద్ద స్క్రీన్ పరిమితి */
+            margin: 0 auto 30px auto; /* మధ్యలో ఉంచడానికి */
+        }
+
+        .org-section {
+            /* పాత max-width తీసివేయబడింది, Flexbox ద్వారా సైజు నియంత్రించబడుతుంది */
+            background: linear-gradient(120deg, #eaf6ff 70%, #f8fbff 100%);
+            border-radius: 14px;
+            box-shadow: 0 2px 12px #b3c6e033;
+            margin-bottom: 0; /* wrapper లో gap ఉపయోగిస్తున్నాం కాబట్టి 0 కి మార్చబడింది */
+            padding: 18px 24px 10px 24px;
+            border: 1.5px solid #b3d1ff;
+            transition: box-shadow 0.2s;
+            
+            /* పెద్ద స్క్రీన్ల కోసం: 3 బాక్సులు ఒకే లైన్‌లో రావడానికి */
+            flex-grow: 1; /* స్థలాన్ని ఆక్రమించడానికి */
+            flex-shrink: 0;
+            flex-basis: calc(33.33% - 14px); /* (100% / 3) - gapAdjustment */
+        }
+        
+        .org-section:nth-child(n+4) {
+             /* 4వ మరియు 5వ బాక్సుల కోసం: 2 బాక్సులు ఒకే లైన్‌లో రావడానికి */
+            flex-basis: calc(50% - 10px); /* (100% / 2) - gapAdjustment */
+        }
+        
+        /* చిన్న స్క్రీన్ల కోసం (మొబైల్) - 900px కంటే తక్కువ */
+        @media (max-width: 900px) {
+            .organization-wrapper {
+                flex-direction: column; /* ఒకదాని కింద ఒకటి రావడానికి */
+                padding: 15px;
+                gap: 15px;
+            }
+            .org-section {
+                max-width: 100%;
+                /* flex-basis: auto; ను సెట్ చేయడం ద్వారా ఒకదాని కింద ఒకటి వస్తుంది */
+                flex-basis: auto; 
+            }
+            .org-section:nth-child(n+4) {
+                 flex-basis: auto; /* 4th మరియు 5th బాక్సులకు కూడా */
+            }
+        }
+        
+        /* మిగతా styles అలాగే ఉంచబడ్డాయి */
+        .org-section:hover {
+            box-shadow: 0 6px 24px #7bb1fa33;
+        }
+        h2 {
+            font-size: 20px;
+            color: #1565c0;
+            margin-top: 0;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-align: center;
+            text-shadow: 0 2px 8px #b3c6e022;
+        }
+        ul {
+            margin-left: 0;
+            padding-left: 18px;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 4px;
+            font-size: 15px;
+            color: #1a237e;
+            font-weight: 600;
+            border-radius: 6px;
+            padding: 2px 8px;
+            transition: 0.2s;
+        }
+        li:hover {
+            background: #e3f2fd;
+            color: #0d47a1;
+        }
+        li > ul > li {
+            font-size: 15px; /* 20px నుండి 15px కి మార్చబడింది, ఇది చాలా పెద్దదిగా ఉంది */
+            color: #333;
+            font-weight: 400;
+            background: #f8fbff;
+            margin-bottom: 2px;
+            border-radius: 4px;
+            padding: 1px 8px;
+        }
+        li > ul > li:hover {
+            background: #eaf6ff;
+            color: #1976d2;
+        }
+        .org-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .org-header h1 {
+            font-size: 2.1rem;
+            color: #1565c0;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-shadow: 0 2px 12px #b3c6e022;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="logo-section">
+            <img src="{{ district.logo }}" alt="AP Police Logo">
+        </div>
+        <div class="title-section">
+            <h1 class="highlight-title">{{ district.name }}</h1>
+        </div>
+        <div class="logo-section">
+            <img src="{{ district.emblem }}" alt="District Emblem">
+        </div>
+    </header>
+    
+    <nav class="navbar">
+        <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+        <ul id="nav-links">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
+            <li><a href="{{ url_for('organization') }}">Organization</a></li>
+            <li><a href="{{ url_for('officers') }}">Officers</a></li>
+            <li><a href="{{ url_for('policestation') }}">Police Stations</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('wings') }}">Wings</a></li>
+            <li><a href="{{ url_for('services') }}">Services</a></li>
+        </ul>
+    </nav>
+    
+    <div class="organization-wrapper">
+    {% for section in organization %}
+        <div class="org-section">
+            <h2>{{ section.title }}</h2>
+            <ul>
+                {% for member in section.members %}
+                    {% if member.subordinates %}
+                        <li>{{ member.name }}
+                            <ul>
+                                {% for sub in member.subordinates %}
+                                    <li>{{ sub }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li>{{ member }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+    </div>
+
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.navbar').classList.toggle('active');
+        });
+    </script>
+
+    <footer class="site-footer">
+        <p>📍 District Police Headquarters, {{ district.name }}</p>
+        <p>📞 Emergency: 100 | Email: sp.asr123@gmail.com</p>
+        <p>&copy; 2025 {{ district.name }}</p>
+    </footer>
+
+</body>
+</html>

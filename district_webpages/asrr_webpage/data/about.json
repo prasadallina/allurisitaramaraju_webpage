@@ -1,0 +1,66 @@
+{
+  "district": {
+    "name": "Alluri Seetharamaraju District Police",
+    "creation_date": "2022-04-04",
+    "headquarters": "Paderu",
+    "geography": "Borders Malkangiri (Odisha), Koraput (Odisha), Sukma (Chhattisgarh), Bhadradri-Kothagudem (Telangana)",
+    "background": "District carved out of Visakhapatnam & East Godavari in reorganisation of Andhra Pradesh districts."
+  },
+  "history": {
+    "rampa_rebellion": {
+      "years": "1922–1924",
+      "leader": "Alluri Sitarama Raju",
+      "description": "A tribal uprising, also known as Manyam Rebellion, against British colonial administration in the forest tracts.",
+      "notable_attacks": [
+        "Police stations in Chintapalli, Rajavomangi, Krishnadevipeta (Aug 1922) – seized weapons and ammunition.",
+        "Ambush in Dammanapalli ghat (Sept 1922) killing British police party.",
+        "Raids on police outposts at Addateegala, Rampachodavaram."
+      ]
+    }
+  },
+  "police_overview": {
+    "goals": [
+      "Ensure law and order in tribal and remote areas",
+      "Combat left-wing extremism",
+      "Community policing and outreach",
+      "Rapid grievance redressal"
+    ],
+    "challenges": [
+      "Remote forest terrains",
+      "Limited infrastructure in agency areas",
+      "Support networks of extremist groups",
+      "Intelligence gathering in dense forests"
+    ]
+  },
+  "maoist_conflict": {
+    "recent_events": [
+      {
+        "date": "2025-07-26",
+        "event": "Maoist surrender",
+        "details": "24-year-old Maoist (Kovvasi Deve alias Sumithra) surrendered in ASR district citing disillusionment." 
+      },
+      {
+        "date": "2025-08",
+        "event": "Leader arrested",
+        "details": "Chaitho (alias Naresh/Santhu), a divisional committee member of Pedabayalu-Korukonda area committee, arrested in forest operation near Killamkota." 
+      },
+      {
+        "date": "2025-06",
+        "event": "Senior Maoist leader killed",
+        "details": "Gajarla Ravi alias Uday (CPI-Maoist Central Committee member) was killed in an encounter in ASR district." 
+      }
+    ],
+    "militia_surrenders": {
+      "date": "2022–2025",
+      "description": "Numerous ‘jan militia’ members (support cadres) surrendered due to pressure, arrests of leadership, and development work in tribal areas. Eg: in 2025, 13 militia surrendered in ASR district. (SATP / local news) "
+    },
+    "arms_cache_seizures": [
+      {
+        "date": "2024-05-24",
+        "location": "Panaslabanda village, under Sileru PS limits",
+        "items": "6 steel carriage landmines, 2 directional mines, explosive from KEL, ~150 m of electrical wire, nails, iron nuts, Maoist literature"
+      }
+    ],
+    "conflict_nature": "Guerrilla warfare, intermittent firefights, ambushes, use of forest terrain by Maoists, attacks on police camps, booby traps, landmine use"
+  }
+}

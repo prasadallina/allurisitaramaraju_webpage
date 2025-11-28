@@ -1,0 +1,124 @@
+{
+  "district": {
+    "name": "ALLURI SEETHARAMARAJU DISTRICT POLICE",
+    "logo": "static/img/AP-Police.png",
+    "emblem": "static/img/Alluri_Sita_Rama_Raju-removebg-preview.png"
+  },
+  "sp_photo": "static/img/asr sp.jpg",
+  "officers": [
+    {
+      "designation": "Addl. SP (Admin) ASR Dist.",
+      "landline": "08935-250380",
+      "mobile": "9346912020",
+      "email": "addlspadmn@gmail.com"
+    },
+    {
+      "designation": "Addl. SP (AR)",
+      "landline": "-",
+      "mobile": "9346912071",
+      "email": ""
+    },
+    {
+      "designation": "SDPO, Paderu",
+      "landline": "8935-250287",
+      "mobile": "9440904232",
+      "email": "sdpo_pdr@vspr.appolice.gov.in"
+    },
+    {
+      "designation": "CI, Paderu",
+      "landline": "8935-250733",
+      "mobile": "9440904231",
+      "email": "ci_pdr@vspr.appolice.gov.in"
+    },
+    {
+      "designation": "CI, Araku",
+      "landline": "8936-249657",
+      "mobile": "9440904226",
+      "email": "ci_ark@vspr.appolice.gov.in"
+    },
+    {
+      "designation": "CI, G.Madugula",
+      "landline": "8935-257436",
+      "mobile": "9440904222",
+      "email": "ci_gmdg@vspr.appolice.gov.in"
+    },
+    {
+      "designation": "SDPO, Chinthapalli",
+      "landline": "8937-238254",
+      "mobile": "9440796111",
+      "email": "sdpo_ctp@vspr.appolice.gov.in"
+    },
+    {
+      "designation": "CI, Chintapalli",
+      "landline": "8937-238230",
+      "mobile": "9440904239",
+      "email": "ci_ctp@vspr.appolice.gov.in"
+    },
+    {
+      "designation": "CI, Koyyuru",
+      "landline": "8932-280833",
+      "mobile": "9440904218",
+      "email": "ci_kyr@vspr.appolice.gov.in"
+    },
+    {
+      "designation": "SDPO, Rampachodavaram",
+      "landline": "8864-243547",
+      "mobile": "9440796517",
+      "email": "sdpo_rcvm@eg.appolice.gov.in"
+    },
+    {
+      "designation": "CI, Rampachodavaram",
+      "landline": "8864-243534",
+      "mobile": "9440900761",
+      "email": "ci_rcvm@eg.appolice.gov.in"
+    },
+    {
+      "designation": "CI, Addateegala",
+      "landline": "8865-272425",
+      "mobile": "9440900768",
+      "email": "ci_adda@eg.appolice.gov.in"
+    },
+    {
+      "designation": "CI, Maredumilli",
+      "landline": "8864-244766",
+      "mobile": "9440900751",
+      "email": "ci_mmd@eg.appolice.gov.in"
+    },
+    {
+      "designation": "CI, Rajavomangi",
+      "landline": "8865-275848",
+      "mobile": "9440900764",
+      "email": "ci_rjvm@eg.appolice.gov.in"
+    },
+    {
+      "designation": "SDPO, Chinturu",
+      "landline": "-",
+      "mobile": "9440900759",
+      "email": "sdpo_chinturu@eg.appolice.gov.in"
+    },
+    {
+      "designation": "CI, Yetapaka",
+      "landline": "-",
+      "mobile": "9490617848",
+      "email": "ci_nlp@eg.appolice.gov.in"
+    },
+    {
+      "designation": "CI, DCRB",
+      "landline": "-",
+      "mobile": "9346912021",
+      "email": "dcrbasr@gmail.com"
+    },
+    {
+      "designation": "CI, SBX",
+      "landline": "-",
+      "mobile": "9440796093",
+      "email": ""
+    },
+    {
+      "designation": "CI, DTC, ASR",
+      "landline": "-",
+      "mobile": "9346912073",
+      "email": ""
+    }
+  ]
+}
